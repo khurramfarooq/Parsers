@@ -59,6 +59,7 @@ function parseExelSheets($obj_sheet, $sheet_name, $name_file) {
     $relatedMedias = null;
     $renditions = null;
     $previews = null;
+    $generes = null;
     
     $isNewTitle = true;
     $previousTitle = null;
@@ -109,8 +110,8 @@ function parseExelSheets($obj_sheet, $sheet_name, $name_file) {
                             $description = null;
                             $relatedMedias = null;
                             $renditions = null;
-                            $previews =null;
-                            $generes
+                            $previews = null;
+                            $generes = null;
                         }
                             
                         $root = new SimpleXMLElement('<ExecutableContentPackage/>');
@@ -121,6 +122,7 @@ function parseExelSheets($obj_sheet, $sheet_name, $name_file) {
                         $relatedMedias = $executeableContent->addChild('RelatedMedias');
                         $renditions = $executeableContent->addChild('Renditions');
                         $previews = $executeableContent->addChild('Previews');
+                        $generes = $executeableContent->addChild('Genres');
                         $executeableContent->addChild('TitleName', $val);
                         
                         
@@ -199,7 +201,9 @@ function parseExelSheets($obj_sheet, $sheet_name, $name_file) {
                             }
                             $rendition->addChild('Filename', $val);
                             break;
-                        case 'generes':
+                        case 'genres':
+                            $generes->addChild('Genre', $val);
+                            break;
                             
                        case 'preview_240x240jpg':
                            $previews->addChild('Filename', $val);
